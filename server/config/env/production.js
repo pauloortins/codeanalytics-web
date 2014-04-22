@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = {
-    mongodb://<user>:<password>@oceanic.mongohq.com:10083/codeanalyticsdb	
     db: 'mongodb://paulo.ortins@gmail.com:artimanha@oceanic.mongohq.com:10083/codeanalyticsdb',
     app: {
         name: 'MEAN - A Modern Stack - Production'
