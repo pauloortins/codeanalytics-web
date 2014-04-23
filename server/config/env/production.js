@@ -3,7 +3,7 @@
 module.exports = {
     db: 'mongodb://codeanalytics:123@oceanic.mongohq.com:10083/codeanalyticsdb',
     app: {
-        name: 'MEAN - A Modern Stack - Production'
+        name: 'CodeAnalytics'
     },
     facebook: {
         clientID: 'APP_ID',

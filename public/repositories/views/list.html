@@ -1,0 +1,12 @@
+<section data-ng-controller="RepositoriesController" data-ng-init="find()">
+	<ul class="repositories unstyled">
+		<li data-ng-repeat="repository in repositories">
+
+		<h2><a data-ng-href="#!/repositories/{{repository._id}}">{{repository.name}}</a></h2>
+        <span>{{repository.author}}</span>
+		<span>{{repository.url}}</span>
+
+		</li>
+	</ul>
+	<h1 data-ng-hide="!repositories || repositories.length">No repositories yet. <br> Why don't you <a href="/#!/repositories/create">Create One</a>?</h1>
+</section>
