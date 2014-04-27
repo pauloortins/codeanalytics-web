@@ -21,3 +21,20 @@ exports.all = function(req, res) {
         }
     });
 };
+
+
+exports.create = function(req, res) {
+    var repository = new Repository(req.body);
+    repository.user = req.user;
+
+    repository.save(function(err) {
+        if (err) {
+            return res.send('users/signup', {
+                errors: err.errors,
+                repository: repository
+            });
+        } else {
+            res.jsonp(repository);
+        }
+    });
+};

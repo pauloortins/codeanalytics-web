@@ -1,3 +1,22 @@
+<section data-ng-controller="RepositoriesController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Add Repository</h3>
+        </div>
+        <div class="panel-body">
+            <form data-ng-submit="create()">
+                <div class="form-group col-sm-6">
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="txtNewRepository" placeholder="Enter repo's url - ex: git@github.com:pauloortins/codeanalytics-web.git" name="repositoryUrl" data-ng-model="url" >
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="btnRequest" type="submit" class="btn btn-primary">Request</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 <section data-ng-controller="RepositoriesController" data-ng-init="find()">
     <div class="panel panel-default">
         <div class="panel-heading">

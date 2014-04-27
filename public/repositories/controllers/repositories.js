@@ -9,4 +9,16 @@ angular.module('mean.repositories').controller('RepositoriesController', ['$scop
         });
 
     };
+
+    $scope.create = function() {
+        var repository = new Repositories({
+            url: this.url
+        });
+
+        repository.$save(function(response) {
+            $location.path('repositories');
+        });
+
+        this.url = '';
+    };
 }]);

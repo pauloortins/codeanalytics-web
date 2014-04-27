@@ -5,4 +5,5 @@ var repositories = require('../controllers/repositories')
 
 module.exports = function(app) {
     app.get('/repositories', repositories.all);
+    app.post('/repositories', repositories.create);
 };

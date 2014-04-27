@@ -46,7 +46,7 @@
 
             }));
 
-            it('$scope.find() should create an array with at least one article object ' +
+            it('$scope.find() should create an array with at least one repository object ' +
                     'fetched from XHR', function() {
 
                         // test expected GET request
