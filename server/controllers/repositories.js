@@ -38,3 +38,21 @@ exports.create = function(req, res) {
         }
     });
 };
+
+/**
+ * Find repository by id
+ */
+exports.repository = function(req, res, next, id) {
+    Repository.load(id, function(err, repository) {
+        
+        if (err) return next(err);
+        if (!repository) return next(new Error('Failed to load repository ' + id));
+        req.repository = repository;
+
+        next();
+    });
+};
+
+exports.show = function(req, res) {
+    res.jsonp(req.repository);
+};

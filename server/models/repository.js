@@ -61,6 +61,15 @@ RepositorySchema.path('author').validate(function(author) {
     return author.length;
 }, 'Author cannot be blank');*/
 
+/**
+ * Statics
+ */
+RepositorySchema.statics.load = function(id, cb) {
+    this.findOne({
+        _id: id
+    }).exec(cb);
+};
+
 RepositorySchema.path('url').validate(function(url) {
     var regex = /git@github.com:.+\/.+.git/;
     return regex.test(url);

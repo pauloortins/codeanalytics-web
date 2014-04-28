@@ -4,8 +4,12 @@
             <h3 class="panel-title">Add Repository</h3>
         </div>
         <div class="panel-body">
+
+            <div ng-repeat="error in errors">
+                <div class="alert alert-danger animated fadeIn">{{error}}</div>
+            </div>
             <form data-ng-submit="create()">
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-12">
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="txtNewRepository" placeholder="Enter repo's url - ex: git@github.com:pauloortins/codeanalytics-web.git" name="repositoryUrl" data-ng-model="url" >
                     </div>
@@ -42,12 +46,10 @@
                     <td>{{repository.url}}</td>
 
                 </tr>
-            </ul>
-
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<h1 data-ng-hide="!repositories || repositories.length">No repositories yet. <br> Why don't you <a href="/#!/repositories/create">Create One</a>?</h1>
+    <h1 data-ng-hide="!repositories || repositories.length">No repositories yet. <br> Why don't you <a href="/#!/repositories/create">Create One</a>?</h1>
 </section>

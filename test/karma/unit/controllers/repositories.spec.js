@@ -66,7 +66,127 @@
                             author: 'author',
                             url: 'repository.com'
                         }]);
-            });
+                    });
+
+            it('$scope.find() should create an array with at least one repository object ' +
+                    'fetched from XHR', function() {
+
+                        // test expected GET request
+                        $httpBackend.expectGET('repositories').respond([{
+                            name: 'repo',
+                            author: 'paulo',
+                            url: 'test@test.com'
+                        }]);
+
+                        // run controller
+                        scope.find();
+                        $httpBackend.flush();
+
+                        // test scope value
+                        expect(scope.repositories).toEqualData([{
+                            name: 'repo',
+                            author: 'paulo',
+                            url: 'test@test.com'
+                        }]);
+
+                    });
+
+            it('$scope.findOne() should create an array with one repository object fetched ' +
+                    'from XHR using a repositoryId URL parameter', function() {
+                        // fixture URL parament
+                        $stateParams.repositoryId = '525a8422f6d0f87f0e407a33';
+
+                        // fixture response object
+                        var testRepositoryData = function() {
+                            return {
+                                name: 'repo',
+                author: 'paulo',
+                url: 'test@test.com'
+                            };
+                        };
+
+                        // test expected GET request with response object
+                        $httpBackend.expectGET(/repositories\/([0-9a-fA-F]{24})$/).respond(testRepositoryData());
+
+                        // run controller
+                        scope.findOne();
+                        $httpBackend.flush();
+
+                        // test scope value
+                        expect(scope.repository).toEqualData(testRepositoryData());
+
+                    });
+
+            it('$scope.create() with valid form data should send a POST request ' +
+                    'with the form input values and then ' +
+                    'locate to new object URL', function() {
+
+                        // fixture expected POST data
+                        var postRepositoryData = function() {
+                            return {
+                                url: 'git@github.com:pauloortins/codeanalytics-web.git'
+                            };
+                        };
+
+                        // fixture expected response data
+                        var responseRepositoryData = function() {
+                            return {
+                                _id: '525cf20451979dea2c000001',
+                url: 'git@github.com:pauloortins/codeanalytics-web.git'
+                            };
+                        };
+
+                        // fixture mock form input values
+                        scope.url = 'git@github.com:pauloortins/codeanalytics-web.git';
+
+                        // test post request is sent
+                        $httpBackend.expectPOST('repositories', postRepositoryData()).respond(responseRepositoryData());
+
+                        // Run controller
+                        scope.create();
+                        $httpBackend.flush();
+
+                        // test URL location to new object
+                        expect($location.path()).toBe('/repositories/' + responseRepositoryData()._id);
+                    });
+
+            it('$scope.create() with invalid form data should send a POST request ' +
+                    'with the form input values and then ' +
+                    'locate to the same URL and ' + 
+                    'show errors', function() {
+
+                        // fixture expected POST data
+                        var postRepositoryData = function() {
+                            return {
+                                url: 'git@github.com:pauloortins/codeanalytics-web.git'
+                            };
+                        };
+
+                        // fixture expected response data
+                        var responseRepositoryData = function() {
+                            return {
+                                errors: {
+                                    url: {
+                                        message:'Invalid'
+                                    }
+                                } 
+                            };
+                        };
+
+                        // fixture mock form input values
+                        scope.url = 'git@github.com:pauloortins/codeanalytics-web.git';
+
+                        // test post request is sent
+                        $httpBackend.expectPOST('repositories', postRepositoryData()).respond(responseRepositoryData());
+
+                        // Run controller
+                        scope.create();
+                        $httpBackend.flush();
+
+                        // test URL location to new object
+                        expect($location.path()).toBe('');
+                        expect(scope.errors[0]).toBe('Invalid');
+                    });
         });
     });
 }());
