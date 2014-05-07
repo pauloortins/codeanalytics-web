@@ -44,7 +44,7 @@ exports.create = function(req, res) {
  */
 exports.repository = function(req, res, next, id) {
     Repository.load(id, function(err, repository) {
-        
+
         if (err) return next(err);
         if (!repository) return next(new Error('Failed to load repository ' + id));
         req.repository = repository;

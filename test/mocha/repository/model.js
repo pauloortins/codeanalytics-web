@@ -15,7 +15,7 @@ describe('<Unit Test>', function() {
     describe('Model Repository:', function() {
         beforeEach(function(done) {
             repository = new Repository({
-                url: 'git@github.com:pauloortins/codeanalytics-web.git'
+                url: 'https://github.com/pauloortins/codeanalytics-samples.git'
             });
 
             repository.save(done);

@@ -4,6 +4,7 @@
  *  Module Dependencies
  */
 var mongoose = require('mongoose'),
+    QueueItem = mongoose.model('QueueItem'),
     Schema = mongoose.Schema;
 
 /**
@@ -34,16 +35,29 @@ RepositorySchema.pre('save', function (next) {
 
     if (self.url != undefined) {
         try {
-            var extracted = self.url.match(/:.*\./)[0].replace(/[:,\.]/g,'')
-            self.author = extracted.split('/')[0];
-            self.name = extracted.split('/')[1];
+            var array = self.url.split('/');
+            self.author = array[array.length-2];
+            self.name = array[array.length-1].replace('.git',''); 
         }
         catch(err) {
         }
     }
 
     next();
-})
+});
+
+RepositorySchema.post('save', function (doc) {
+    var item = new QueueItem({
+        url: doc.url
+    });
+    
+    console.log(doc);
+    console.log(item);
+
+    item.save(function(err){
+        console.log(err);
+    });
+});
 
 /**
  * Validations
@@ -71,7 +85,8 @@ RepositorySchema.statics.load = function(id, cb) {
 };
 
 RepositorySchema.path('url').validate(function(url) {
-    var regex = /git@github.com:.+\/.+.git/;
+    var regex = /https:\/\/github.com\/.+\/.+.git/;
     return regex.test(url);
 }, 'Url cannot be invalid');
+
 mongoose.model('Repository', RepositorySchema);

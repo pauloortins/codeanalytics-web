@@ -11,7 +11,7 @@
             <form data-ng-submit="create()">
                 <div class="form-group col-sm-12">
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="txtNewRepository" placeholder="Enter repo's url - ex: git@github.com:pauloortins/codeanalytics-web.git" name="repositoryUrl" data-ng-model="url" >
+                        <input type="text" class="form-control" id="txtNewRepository" placeholder="Enter repo's url - ex: https://github.com/pauloortins/codeanalytics-samples.git" name="repositoryUrl" data-ng-model="url" >
                     </div>
                     <div class="col-sm-2">
                         <button id="btnRequest" type="submit" class="btn btn-primary">Request</button>
@@ -37,8 +37,6 @@
                 </thead>
 
                 <tbody>
-
-
                 <tr data-ng-repeat="repository in repositories">
 
                     <td><a data-ng-href="#!/repositories/{{repository._id}}">{{repository.name}}</a></td>

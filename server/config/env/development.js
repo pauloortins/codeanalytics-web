@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    db: 'mongodb://localhost/mean-dev',
+    db: 'mongodb://codeanalytics:123@oceanic.mongohq.com:10083/codeanalyticsdb',
     app: {
         name: 'CodeAnalytics'
     },
