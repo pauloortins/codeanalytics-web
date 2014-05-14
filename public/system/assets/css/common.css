@@ -1,31 +1,55 @@
+html{
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
 .page-header {
-  padding-bottom: 0;
-  margin: 0;
-  border-bottom: 0;
+    padding-bottom: 0;
+    margin: 0;
+    border-bottom: 0;
 }
-.page-header .navbar-nav{ float: right;}
+
+.page-header .navbar-nav { 
+    float: right;
+}
+
 .page-header>div>div, .page-header>div>ul {
-  display:inline-block;
+    display:inline-block;
 }
+
 .text-edit{
-  padding: 13px 0 0 0;
+    padding: 13px 0 0 0;
 }
+
 .account {
-  text-align:right;
+    text-align:right;
 }
+
 .account>div , .account>ul {
-  text-align:left;
+    text-align:left;
 }
+
 .navbar .nav>li>a.brand {
     padding-left:20px;
     margin-left:0
 }
 
 .content {
-    margin-top:70px;
-    width:100%
+    padding-top:70px;
+    width:100%;
+    background-image: url("../img/wood_content.jpeg");
+    background-repeat: repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: absolute;
+    height: 100%;
+    overflow: auto;
 }
-
+    
 footer {
     position:fixed;
     left:0;
@@ -40,4 +64,17 @@ footer {
 
 footer p {
     padding:5px 0 12px 10px
+}
+
+.navbar-inverse {
+    background-image: url("../img/wood_header.jpeg");
+    background-repeat: repeat-x;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
 }

@@ -36,6 +36,22 @@ angular.module('mean.repositories').controller('RepositoriesController', ['$scop
             repositoryId: $stateParams.repositoryId
         }, function(repository) {
             $scope.repository = repository;
+            $scope.numberOfNamespaces = repository.commits[0].folders.length;
+            var classes = repository.commits[0].folders.reduce(function(x,y) {
+                x = x.concat(y.folders);
+                return x; 
+            }, []);
+            $scope.numberOfClasses = classes.length; 
+            $scope.classesWithBiggestLOC = classes.sort(function(a,b) {return b.info.linesOfCode - a.info.linesOfCode; }).slice(0,10);
+
+            var methods = classes.reduce(function(x,y) {
+                x = x.concat(y.files);
+                return x;
+            }, []);
+
+            $scope.numberOfMethods = methods.length; 
+            $scope.methodsWithBiggestLOC = methods.sort(function(a,b) {return b.info.linesOfCode - a.info.linesOfCode; }).slice(0,10);
+
         });
     };
 }]);
