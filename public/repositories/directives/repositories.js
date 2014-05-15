@@ -1,12 +1,13 @@
 angular.module('mean.repositories')
 .directive('listing', function() {
   return {
-    template: '<ul ng-repeat="element in list">' +
-        '<li>{{element.name}} - {{element.value}}</li>' +
-        '</ul>',
+    templateUrl: 'public/repositories/templates/listing.html',
     restrict: 'E',
     scope: {
-      'list': '='
-    }
+      'list': '=list',
+      'title': '=title',
+      'size': '=size'
+    },
+    replace: true
   };
 });

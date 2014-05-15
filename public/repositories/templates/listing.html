@@ -1,0 +1,21 @@
+<div class="col-md-{{size}}">
+    <table> 
+        <thead>
+            <tr>
+                <th colspan="2">
+                    {{title}}
+                </th>
+            </tr>
+        </thead> 
+        <tbody ng-repeat="element in list">
+        <tr>
+            <td>
+                {{element.name}}
+            </td>
+            <td>
+                {{element.value}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,7 +1,9 @@
 <section data-ng-controller="RepositoriesController" data-ng-init="findOne()">
     <h2>{{repository.name}}</h2>
 
-    <listing list="basicInfo"></listing>
-    <listing list="classesWithBiggestLOC"></listing>
-    <listing list="methodsWithBiggestLOC"></listing>
+    <div class="row">
+        <listing list="basicInfo" title="'Basic Info'" size="2"></listing>
+        <listing list="classesWithBiggestLOC" title="'Classes (LOC)'" size="5"></listing>
+        <listing list="methodsWithBiggestLOC" title="'Methods (LOC)'" size="5"></listing>
+    </div>
 </section>
