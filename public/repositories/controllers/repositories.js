@@ -36,22 +36,37 @@ angular.module('mean.repositories').controller('RepositoriesController', ['$scop
             repositoryId: $stateParams.repositoryId
         }, function(repository) {
             $scope.repository = repository;
-            $scope.numberOfNamespaces = repository.commits[0].folders.length;
+            
+            var numberOfNamespaces = repository.commits[0].folders.length;
+            
             var classes = repository.commits[0].folders.reduce(function(x,y) {
                 x = x.concat(y.folders);
                 return x; 
             }, []);
-            $scope.numberOfClasses = classes.length; 
-            $scope.classesWithBiggestLOC = classes.sort(function(a,b) {return b.info.linesOfCode - a.info.linesOfCode; }).slice(0,10);
+
+            var linesOfCode = classes.reduce(function(x,y) {return x + y.info.linesOfCode;},0);
+
+            var numberOfClasses = classes.length; 
 
             var methods = classes.reduce(function(x,y) {
                 x = x.concat(y.files);
                 return x;
             }, []);
-
-            $scope.numberOfMethods = methods.length; 
-            $scope.methodsWithBiggestLOC = methods.sort(function(a,b) {return b.info.linesOfCode - a.info.linesOfCode; }).slice(0,10);
-
+            
+            var numberOfMethods = methods.length; 
+            
+            $scope.classesWithBiggestLOC = classes.sort(function(a,b) {return b.info.linesOfCode - a.info.linesOfCode; }).slice(0,10)
+                .map(function(x) {return {name: x.info.name, value: x.info.linesOfCode};});
+            
+            $scope.methodsWithBiggestLOC = methods.sort(function(a,b) {return b.info.linesOfCode - a.info.linesOfCode; }).slice(0,10)
+                .map(function(x) {return {name: x.info.name, value: x.info.linesOfCode};});
+            
+            $scope.basicInfo = [
+                { name: "Lines of Code", value: linesOfCode},
+                { name: "Namespace", value: numberOfNamespaces },
+                { name: "Classes", value: numberOfClasses},
+                { name: "Methods", value: numberOfMethods}
+            ];
         });
     };
 }]);
